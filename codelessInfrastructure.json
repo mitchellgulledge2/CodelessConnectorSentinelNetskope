@@ -49,7 +49,7 @@
     // Next is the variables section here
     "variables": {
         "workspaceResourceId": "[resourceId('microsoft.OperationalInsights/Workspaces', parameters('workspace'))]",
-        "_solutionName": "Netskope v2 CCP",
+        "_solutionName": "Netskope Infrastructure v2 CCP",
         "_solutionVersion": "3.0.0",
         "_solutionAuthor": "Microsoft",
         "_packageIcon": "<img src=\"{LogoLink}\" width=\"75px\" height=\"75px\">", // Enter the http link for the logo. NOTE: This field is only recommended for Azure Global Cloud.
@@ -57,11 +57,11 @@
         "dataConnectorVersionConnectorDefinition": "1.0.0",
         "dataConnectorVersionConnections": "1.0.0",
         "_solutionTier": "Microsoft",
-        "_dataConnectorContentIdConnectorDefinition": "Netskopev2CCPDefinition",
+        "_dataConnectorContentIdConnectorDefinition": "NetskopeInfrastructurev2CCPDefinition",
         "dataConnectorTemplateNameConnectorDefinition": "[concat(parameters('workspace'),'-dc-',uniquestring(variables('_dataConnectorContentIdConnectorDefinition')))]",
-        "_dataConnectorContentIdConnections": "Netskopev2CCPConnection",
+        "_dataConnectorContentIdConnections": "NetskopeInfrastructurev2CCPConnection",
         "dataConnectorTemplateNameConnections": "[concat(parameters('workspace'),'-dc-',uniquestring(variables('_dataConnectorContentIdConnections')))]",
-        "_logAnalyticsTableId1": "NetskopeInfrastructure_CL"
+        "_logAnalyticsTableId1": "NetskopeAlertsEvents_CL"
         // Enter more variables as needed "":""
     },
     // Next is the resources sections here
@@ -123,13 +123,13 @@
                             "type": "Microsoft.Insights/dataCollectionRules",
                             "location": "[parameters('workspace-location')]",
                             "dependsOn": [
-                                "NetskopeInfrastructure_CL"
+                                "NetskopeAlertsEvents_CL"
                             ],
                             "kind": null,
                             "properties": {
                                 "dataCollectionEndpointId": "[concat('/subscriptions/',parameters('subscription'),'/resourceGroups/',parameters('resourceGroupName'),'/providers/Microsoft.Insights/dataCollectionEndpoints/',parameters('dataCollectionEndpointName'))]",
                                 "streamDeclarations": {
-                                    "Custom-NetskopeInfrastructure_CL": {
+                                    "Custom-NetskopeAlertsEvents_CL": {
                                         "columns": [
                                             {
                                                 "name": "TimeGenerated",
@@ -950,13 +950,13 @@
                                 "dataFlows": [
                                     {
                                         "streams": [
-                                            "Custom-NetskopeInfrastructure_CL"
+                                            "Custom-NetskopeAlertsEvents_CL"
                                         ],
                                         "destinations": [
                                             "7d3f3184fd304ede9c18f3d34dbd2a85"
                                         ],
                                         "transformKql": "source\n| extend TimeGenerated = todatetime(datetime(1970-01-01) + (timestamp / 1000) * 1s)\n| project-rename count_i = ['count']\n| project-rename title_s = ['title']\n| project-rename type_s = ['type']\n| project-away _id\n\n",
-                                        "outputStream": "Custom-NetskopeInfrastructure_CL"
+                                        "outputStream": "Custom-NetskopeAlertsEvents_CL"
                                     }
                                 ]
                             }
@@ -976,7 +976,7 @@
                                 "totalRetentionInDaysAsDefault": true,
                                 "schema": {
                                     "tableSubType": "DataCollectionRuleBased",
-                                    "name": "NetskopeInfrastructure_CL",
+                                    "name": "NetskopeAlertsEvents_CL",
                                     "tableType": "CustomLog",
                                     "columns": [
                                         {
