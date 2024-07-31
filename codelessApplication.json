@@ -53,7 +53,7 @@
         "_solutionVersion": "3.0.0",
         "_solutionAuthor": "Microsoft",
         "_packageIcon": "<img src=\"{LogoLink}\" width=\"75px\" height=\"75px\">", // Enter the http link for the logo. NOTE: This field is only recommended for Azure Global Cloud.
-        "_solutionId": "azuresentinel.azure-sentinel-solution-azuresentinel.azure-sentinel-Netskopev2CCP",
+        "_solutionId": "azuresentinel.azure-sentinel-solution-azuresentinel.azure-sentinel-NetskopeApplicationv2CCP",
         "dataConnectorVersionConnectorDefinition": "1.0.0",
         "dataConnectorVersionConnections": "1.0.0",
         "_solutionTier": "Microsoft",
