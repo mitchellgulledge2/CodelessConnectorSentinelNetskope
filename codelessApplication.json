@@ -2408,7 +2408,7 @@
                             }
                         },
                         {
-                            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/', 'Netskopev2CCP')]", // Replace the last part of the name with your data connector name
+                            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/', 'NetskopeApplicationv2CCP')]", // Replace the last part of the name with your data connector name
                             //  To create several connections using this template, make the name dynamic. For example, use the 'concat' function to add the connector name with a GUID using the 'guid' function.
                             "apiVersion": "2024-06-01",
                             "type": "Microsoft.OperationalInsights/workspaces/providers/dataConnectors",
