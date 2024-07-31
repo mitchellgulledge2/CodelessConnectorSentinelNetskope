@@ -53,7 +53,7 @@
         "_solutionVersion": "3.0.0",
         "_solutionAuthor": "Microsoft",
         "_packageIcon": "<img src=\"{LogoLink}\" width=\"75px\" height=\"75px\">", // Enter the http link for the logo. NOTE: This field is only recommended for Azure Global Cloud.
-        "_solutionId": "azuresentinel.azure-sentinel-solution-azuresentinel.azure-sentinel-Netskopev2CCP",
+        "_solutionId": "azuresentinel.azure-sentinel-solution-azuresentinel.azure-sentinel-NetskopeConnectionv2CCP",
         "dataConnectorVersionConnectorDefinition": "1.0.0",
         "dataConnectorVersionConnections": "1.0.0",
         "_solutionTier": "Microsoft",
@@ -2408,7 +2408,7 @@
                             }
                         },
                         {
-                            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/', 'Netskopev2CCP')]", // Replace the last part of the name with your data connector name
+                            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/', 'NetskopeConnectionv2CCP')]", // Replace the last part of the name with your data connector name
                             //  To create several connections using this template, make the name dynamic. For example, use the 'concat' function to add the connector name with a GUID using the 'guid' function.
                             "apiVersion": "2024-06-01",
                             "type": "Microsoft.OperationalInsights/workspaces/providers/dataConnectors",
