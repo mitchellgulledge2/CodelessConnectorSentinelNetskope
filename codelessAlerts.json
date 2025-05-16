@@ -2034,7 +2034,7 @@
                                 "request": {
                                     "apiEndpoint": "[[parameters('endpoint')]",
                                     "rateLimitQPS": 10,
-                                    "queryWindowInMin": 5,
+                                    "queryWindowInMin": 1,
                                     "httpMethod": "GET",
                                     "retryCount": 3,
                                     "timeoutInSeconds": 60,
