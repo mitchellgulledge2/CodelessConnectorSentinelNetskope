@@ -136,10 +136,6 @@
                                                 "type": "datetime"
                                             },
                                             {
-                                                "name": "_id",
-                                                "type": "string"
-                                            },
-                                            {
                                                 "name": "access_method",
                                                 "type": "string"
                                             },
@@ -168,6 +164,10 @@
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "alert_id",
+                                                "type": "string"
+                                            },
+                                            {
                                                 "name": "alert_name",
                                                 "type": "string"
                                             },
@@ -180,7 +180,19 @@
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "app_activity",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "app_sessionid",
+                                                "type": "string"
+                                            },
+                                            {
                                                 "name": "appcategory",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "appsuite",
                                                 "type": "string"
                                             },
                                             {
@@ -192,7 +204,43 @@
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "breach_date",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "breach_description",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "breach_id",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "breach_media_references",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "breach_score",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "breach_target_references",
+                                                "type": "string"
+                                            },
+                                            {
                                                 "name": "browser",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "browser_sessionid",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "browser_version",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "bypass_traffic",
                                                 "type": "string"
                                             },
                                             {
@@ -208,16 +256,196 @@
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "client_bytes",
+                                                "type": "int"
+                                            },
+                                            {
                                                 "name": "compliance_standards",
                                                 "type": "dynamic"
                                             },
                                             {
-                                                "name": "count",
+                                                "name": "conn_duration",
                                                 "type": "int"
+                                            },
+                                            {
+                                                "name": "conn_endtime",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "conn_starttime",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "connectionid",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "CononicalName",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "count_i",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "data_type",
+                                                "type": "string"
                                             },
                                             {
                                                 "name": "device",
                                                 "type": "string"
+                                            },
+                                            {
+                                                "name": "device_classification",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_file",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_incidentid",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_is_unique_count",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_mail_parent_id",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_parentid",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_profile",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_rule",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_rule_count",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "dlp_rule_severity",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dlp_unique_count",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "domain",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dst_country",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dst_geoip_src",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "dst_latitude",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "dst_location",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dst_longitude",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "dst_region",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dst_timezone",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dst_zipcode",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dstip",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dsthost",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "dstport",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "email_source",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "event_type",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "evt_src_chnl",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "exposure",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "external_collaborator_count",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "external_email",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "file_cls_encrypted",
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "name": "file_lang",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "file_path",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "file_size",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "file_type",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "from_user",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "fromlogs",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "hostname",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "http_transaction_count",
+                                                "type": "int"
                                             },
                                             {
                                                 "name": "iaas_asset_tags",
@@ -228,11 +456,135 @@
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "instance",
+                                                "type": "string"
+                                            },
+                                            {
                                                 "name": "instance_id",
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "internal_collaborator_count",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "justification_reason",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "justification_type",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "last_app",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "last_country",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "last_device",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "last_location",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "last_region",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "last_timestamp",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "log_file_name",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "malicious",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "malsite_category",
+                                                "type": "dynamic"
+                                            },
+                                            {
+                                                "name": "malsite_country",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "malsite_id",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "malsite_ip_host",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "malsite_latitude",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "malsite_longitude",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "malsite_region",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "managed_app",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "managementID",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "matched_username",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "md5",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "mime_type",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "modified",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "netskope_activity",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "netskope_pop",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "notify_template",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "nsdeviceuid",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "numbytes",
+                                                "type": "int"
+                                            },
+                                            {
                                                 "name": "object",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "object_id",
                                                 "type": "string"
                                             },
                                             {
@@ -240,7 +592,19 @@
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "org",
+                                                "type": "string"
+                                            },
+                                            {
                                                 "name": "organization_unit",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "orig_ty",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "orignal_file_path",
                                                 "type": "string"
                                             },
                                             {
@@ -248,16 +612,60 @@
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "os_version",
+                                                "type": "string"
+                                            },
+                                            {
                                                 "name": "other_categories",
                                                 "type": "dynamic"
+                                            },
+                                            {
+                                                "name": "outer_doc_type",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "owner",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "page",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "page_site",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "parent_id",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "password_type",
+                                                "type": "string"
                                             },
                                             {
                                                 "name": "policy",
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "policy_actions",
+                                                "type": "dynamic"
+                                            },
+                                            {
                                                 "name": "policy_id",
-                                                "type": "int"
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "profile_id",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "protocol",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "referer",
+                                                "type": "string"
                                             },
                                             {
                                                 "name": "region_id",
@@ -268,12 +676,24 @@
                                                 "type": "string"
                                             },
                                             {
+                                                "name": "req_cnt",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "requestid",
+                                                "type": "string"
+                                            },
+                                            {
                                                 "name": "resource_category",
                                                 "type": "string"
                                             },
                                             {
                                                 "name": "resource_group",
-                                                "type": "dynamic"
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "resp_cnt",
+                                                "type": "int"
                                             },
                                             {
                                                 "name": "sa_profile_id",
@@ -296,131 +716,11 @@
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "site",
+                                                "name": "sAMAccountName",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "timestamp",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "title",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "traffic_type",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "type",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "ur_normalized",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "user",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "userkey",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "shared_domains",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "dlp_rule",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "dlp_profile",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "external_collaborator_count",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "alert_id",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "last_region",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "severity",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "protocol",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "managementID",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "evt_src_chnl",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "netskope_pop",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "malsite_category",
-                                                "type": "dynamic"
-                                            },
-                                            {
-                                                "name": "threshold",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "file_type",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "user_generated",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "http_transaction_count",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "owner",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "malsite_id",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "web_url",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "password_type",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "dst_zipcode",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "severity_level",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "justification_type",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "log_file_name",
+                                                "name": "sanctioned_instance",
                                                 "type": "string"
                                             },
                                             {
@@ -428,7 +728,7 @@
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "threat_match_value",
+                                                "name": "serial",
                                                 "type": "string"
                                             },
                                             {
@@ -436,287 +736,15 @@
                                                 "type": "int"
                                             },
                                             {
-                                                "name": "dsthost",
+                                                "name": "sessionid",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "file_size",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "managed_app",
+                                                "name": "severity",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "app_session_id",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "dlp_file",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "email_source",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "appsuite",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "shared_with",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "orig_ty",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "parent_id",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "total_collaborator_count",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "sanctioned_instance",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "threat_source_id",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "last_app",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "malsite_country",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "data_type",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "bypass_traffic",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "fromlogs",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "page",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "conn_duration",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "breach_media_references",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "telemetry_app",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "dlp_mail_parent_id",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "file_lang",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "external_email",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "malsite_ip_host",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "src_geoip_src",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "event_type",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "breach_date",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "internal_collaborator_count",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "dst_location",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "src_zipcode",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "from_user",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "policy_actions",
-                                                "type": "dynamic"
-                                            },
-                                            {
-                                                "name": "notify_template",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "numbytes",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "hostname",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "suppression_end_time",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "malicious",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "referer",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "malsite_region",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "profile_id",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "browser_session_id",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "serial",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "sAMAccountName",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "userPrincipalName",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "justification_reason",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "dst_latitude",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "dlp_unique_count",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "true_obj_type",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "breach_target_references",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "suppression_start_time",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "dst_region",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "breach_description",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "modified",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "suppression_key",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "CononicalName",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "src_latitude",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "object_id",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "resp_cnt",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "web_universal_connector",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "dst_country",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "src_region",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "malsite_latitude",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "netskope_activity",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "to_object",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "file_path",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "last_location",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "exposure",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "threshold_time",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "universal_connector",
+                                                "name": "severity_level",
                                                 "type": "string"
                                             },
                                             {
@@ -724,83 +752,7 @@
                                                 "type": "int"
                                             },
                                             {
-                                                "name": "useragent",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "breach_score",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "connection_id",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "src_location",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "true_obj_category",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "org",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "instance",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "breach_id",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "request_id",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "userip",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "dst_geoip_src",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "dlp_rule_count",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "dlp_rule_severity",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "orignal_file_path",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "src_longitude",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "app_activity",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "os_version",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "sessionid",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "srcip",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "two_factor_auth",
+                                                "name": "sfwder",
                                                 "type": "string"
                                             },
                                             {
@@ -808,7 +760,39 @@
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "dst_timezone",
+                                                "name": "shared_domains",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "shared_with",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "site",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "src_country",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "src_geoip_src",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "src_latitude",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "src_location",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "src_longitude",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "src_region",
                                                 "type": "string"
                                             },
                                             {
@@ -816,19 +800,83 @@
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "dst_longitude",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "domain",
+                                                "name": "src_timezone",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "transaction_id",
+                                                "name": "src_zipcode",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "srcip",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "suppression_end_time",
                                                 "type": "int"
                                             },
                                             {
+                                                "name": "suppression_key",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "suppression_start_time",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "telemetry_app",
+                                                "type": "string"
+                                            },
+                                            {
                                                 "name": "threat_match_field",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "threat_match_value",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "threat_source_id",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "threshold",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "threshold_time",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "timestamp",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "title_s",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "to_object",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "total_collaborator_count",
+                                                "type": "int"
+                                            },
+                                            {
+                                                "name": "traffic_type",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "transactionid",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "true_obj_category",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "true_obj_type",
                                                 "type": "string"
                                             },
                                             {
@@ -836,51 +884,19 @@
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "mime_type",
+                                                "name": "two_factor_auth",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "client_bytes",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "dlp_incident_id",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "src_timezone",
+                                                "name": "type_s",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "last_device",
+                                                "name": "universal_connector",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "dlp_parent_id",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "conn_starttime",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "device_classification",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "last_timestamp",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "browser_version",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "nsdeviceuid",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "page_site",
+                                                "name": "ur_normalized",
                                                 "type": "string"
                                             },
                                             {
@@ -888,51 +904,35 @@
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "dstport",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "src_country",
+                                                "name": "user",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "conn_endtime",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "malsite_longitude",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "md5",
+                                                "name": "user_generated",
                                                 "type": "string"
-                                            },
-                                            {
-                                                "name": "req_cnt",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "name": "dlp_is_unique_count",
-                                                "type": "string"
-                                            },
-                                            {
-                                                "name": "file_cls_encrypted",
-                                                "type": "boolean"
                                             },
                                             {
                                                 "name": "user_id",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "last_country",
+                                                "name": "useragent",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "matched_username",
+                                                "name": "userip",
                                                 "type": "string"
                                             },
                                             {
-                                                "name": "dstip",
+                                                "name": "userkey",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "userPrincipalName",
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "web_universal_connector",
                                                 "type": "string"
                                             }
                                         ]
@@ -955,7 +955,7 @@
                                         "destinations": [
                                             "7d3f3184fd304ede9c18f3d34dbd2a85"
                                         ],
-                                        "transformKql": "source\n| extend TimeGenerated = todatetime(datetime(1970-01-01) + (timestamp / 1000) * 1s)\n| project-rename count_i = ['count']\n| project-rename title_s = ['title']\n| project-rename type_s = ['type']\n| project-away _id\n\n",
+                                        "transformKql": "source | extend TimeGenerated = datetime(1970-01-01) + timestamp * 1sec | extend app_sessionid = tostring(app_session_id), browser_sessionid = tostring(browser_session_id), connectionid = tostring(connection_id), dlp_incidentid = tostring(dlp_incident_id), dlp_parentid = tostring(dlp_parent_id), requestid = tostring(request_id), transactionid = tostring(transaction_id) | project-rename count_i = ['count'], title_s = ['title'], type_s = ['type'] | project-away _id ",
                                         "outputStream": "Custom-NetskopeAlertsEvents_CL"
                                     }
                                 ]
@@ -980,1206 +980,810 @@
                                     "tableType": "CustomLog",
                                     "columns": [
                                         {
-                                            "name": "access_method",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "TimeGenerated",
+                                          "type": "datetime"
                                         },
                                         {
-                                            "name": "account_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "access_method",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "account_name",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "account_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "acked",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "account_name",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "action",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "acked",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "activity",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "action",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "alert",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "activity",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "alert_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "alert",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "alert_name",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "alert_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "alert_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "alert_name",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "app",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "alert_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "app_activity",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "app",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "app_session_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "app_activity",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "appcategory",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "app_sessionid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "appsuite",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "appcategory",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "asset_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "appsuite",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "asset_object_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "asset_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "breach_date",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "asset_object_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "breach_description",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "breach_date",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "breach_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "breach_description",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "breach_media_references",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "breach_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "breach_score",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "breach_media_references",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "breach_target_references",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "breach_score",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "browser",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "breach_target_references",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "browser_session_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "browser",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "browser_version",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "browser_sessionid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "bypass_traffic",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "browser_version",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "category",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "bypass_traffic",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "cci",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "category",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "ccl",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "cci",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "client_bytes",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "ccl",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "compliance_standards",
-                                            "type": "dynamic",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "client_bytes",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "conn_duration",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "compliance_standards",
+                                          "type": "dynamic"
                                         },
                                         {
-                                            "name": "conn_endtime",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "conn_duration",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "conn_starttime",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "conn_endtime",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "connection_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "conn_starttime",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "CononicalName",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "connectionid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "count_i",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "CononicalName",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "data_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "count_i",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "device",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "data_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "device_classification",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "device",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_file",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "device_classification",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_incident_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_file",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_is_unique_count",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_incidentid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_mail_parent_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_is_unique_count",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_parent_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_mail_parent_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_profile",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_parentid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_rule",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_profile",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_rule_count",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_rule",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dlp_rule_severity",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_rule_count",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "dlp_unique_count",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_rule_severity",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "domain",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dlp_unique_count",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "dst_country",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "domain",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dst_geoip_src",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dst_country",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dst_latitude",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dst_geoip_src",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "dst_location",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dst_latitude",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "dst_longitude",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dst_location",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dst_region",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dst_longitude",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "dst_timezone",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dst_region",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dst_zipcode",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dst_timezone",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dsthost",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dst_zipcode",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dstip",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dstip",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "dstport",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dsthost",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "email_source",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "dstport",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "event_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "email_source",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "evt_src_chnl",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "event_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "exposure",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "evt_src_chnl",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "external_collaborator_count",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "exposure",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "external_email",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "external_collaborator_count",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "file_cls_encrypted",
-                                            "type": "boolean",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "external_email",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "file_lang",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "file_cls_encrypted",
+                                          "type": "boolean"
                                         },
                                         {
-                                            "name": "file_path",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "file_lang",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "file_size",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "file_path",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "file_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "file_size",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "from_user",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "file_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "fromlogs",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "from_user",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "hostname",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "fromlogs",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "http_transaction_count",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "hostname",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "iaas_asset_tags",
-                                            "type": "dynamic",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "http_transaction_count",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "iaas_remediated",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "iaas_asset_tags",
+                                          "type": "dynamic"
                                         },
                                         {
-                                            "name": "instance",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "iaas_remediated",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "instance_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "instance",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "internal_collaborator_count",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "instance_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "justification_reason",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "internal_collaborator_count",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "justification_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "justification_reason",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "last_app",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "justification_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "last_country",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "last_app",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "last_device",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "last_country",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "last_location",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "last_device",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "last_region",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "last_location",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "last_timestamp",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "last_region",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "log_file_name",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "last_timestamp",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "malicious",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "log_file_name",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "malsite_category",
-                                            "type": "dynamic",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "malicious",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "malsite_country",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "malsite_category",
+                                          "type": "dynamic"
                                         },
                                         {
-                                            "name": "malsite_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "malsite_country",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "malsite_ip_host",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "malsite_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "malsite_latitude",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "malsite_ip_host",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "malsite_longitude",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "malsite_latitude",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "malsite_region",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "malsite_longitude",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "managed_app",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "malsite_region",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "managementID",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "managed_app",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "matched_username",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "managementID",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "md5",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "matched_username",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "mime_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "md5",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "modified",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "mime_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "netskope_activity",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "modified",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "netskope_pop",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "netskope_activity",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "notify_template",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "netskope_pop",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "nsdeviceuid",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "notify_template",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "numbytes",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "nsdeviceuid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "object",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "numbytes",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "object_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "object",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "object_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "object_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "org",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "object_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "organization_unit",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "org",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "orig_ty",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "organization_unit",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "orignal_file_path",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "orig_ty",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "os",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "orignal_file_path",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "os_version",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "os",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "other_categories",
-                                            "type": "dynamic",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "os_version",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "owner",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "other_categories",
+                                          "type": "dynamic"
                                         },
                                         {
-                                            "name": "page",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "outer_doc_type",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "page_site",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "owner",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "parent_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "page",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "password_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "page_site",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "policy",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "parent_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "policy_actions",
-                                            "type": "dynamic",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "password_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "policy_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "policy",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "profile_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "policy_actions",
+                                          "type": "dynamic"
                                         },
                                         {
-                                            "name": "protocol",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "policy_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "referer",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "profile_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "region_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "protocol",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "region_name",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "referer",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "req_cnt",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "region_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "request_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "region_name",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "resource_category",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "req_cnt",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "resource_group",
-                                            "type": "dynamic",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "requestid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "resp_cnt",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "resource_category",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "sa_profile_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "resource_group",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "sa_profile_name",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "resp_cnt",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "sa_rule_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sa_profile_id",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "sa_rule_name",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sa_profile_name",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "sa_rule_severity",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sa_rule_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "sAMAccountName",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sa_rule_name",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "sanctioned_instance",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sa_rule_severity",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "scan_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sAMAccountName",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "serial",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sanctioned_instance",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "server_bytes",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "scan_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "sessionid",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "serial",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "severity",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "server_bytes",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "severity_level",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sessionid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "severity_level_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "severity",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "sha256",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "severity_level",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "shared_domains",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "severity_level_id",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "shared_with",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sfwder",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "site",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "sha256",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "src_country",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "shared_domains",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "src_geoip_src",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "shared_with",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "src_latitude",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "site",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "src_location",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_country",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "src_longitude",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_geoip_src",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "src_region",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_latitude",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "src_time",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_location",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "src_timezone",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_longitude",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "src_zipcode",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_region",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "srcip",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_time",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "suppression_end_time",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_timezone",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "suppression_key",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "src_zipcode",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "suppression_start_time",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "srcip",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "telemetry_app",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "suppression_end_time",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "threat_match_field",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "suppression_key",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "threat_match_value",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "suppression_start_time",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "threat_source_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "telemetry_app",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "threshold",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "threat_match_field",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "threshold_time",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "threat_match_value",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "timestamp",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "threat_source_id",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "title_s",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "threshold",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "to_object",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "threshold_time",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "total_collaborator_count",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "timestamp",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "traffic_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "title_s",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "transaction_id",
-                                            "type": "int",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "to_object",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "true_obj_category",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "total_collaborator_count",
+                                          "type": "int"
                                         },
                                         {
-                                            "name": "true_obj_type",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "traffic_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "tss_mode",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "transactionid",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "two_factor_auth",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "true_obj_category",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "type_s",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "true_obj_type",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "universal_connector",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "tss_mode",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "ur_normalized",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "two_factor_auth",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "url",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "type_s",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "user",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "universal_connector",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "user_generated",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "ur_normalized",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "user_id",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "url",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "useragent",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "user",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "userip",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "user_generated",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "userkey",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "user_id",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "userPrincipalName",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "useragent",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "web_universal_connector",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "userip",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "web_url",
-                                            "type": "string",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "userkey",
+                                          "type": "string"
                                         },
                                         {
-                                            "name": "TimeGenerated",
-                                            "type": "datetime",
-                                            "isDefaultDisplay": false,
-                                            "isHidden": false
+                                          "name": "userPrincipalName",
+                                          "type": "string"
+                                        },
+                                        {
+                                          "name": "web_universal_connector",
+                                          "type": "string"
                                         }
-                                    ],
+                                      ],
                                     "standardColumns": [
                                         {
                                             "name": "TenantId",
