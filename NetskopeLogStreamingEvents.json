@@ -57,6 +57,10 @@
         "_logAnalyticsTableAlerts": "NetskopeAlerts_CL",
         "_logAnalyticsTableAppEvents": "NetskopeAppEvents_CL",
         "_logAnalyticsTablePageEvents": "NetskopePageEvents_CL",
+        "_logAnalyticsTableAuditEvents": "NetskopeAuditEvents_CL",
+        "_logAnalyticsTableClientStatusEvents": "NetskopeClientStatusEvents_CL",
+        "_logAnalyticsTableIncidentEvents": "NetskopeIncidentEvents_CL",
+        "_logAnalyticsTableNetworkEvents": "NetskopeNetworkEvents_CL",
         "commonKqlTransformations": "[concat('extend TimeGenerated=datetime(1970-01-01)+timestamp*1sec | extend app_session_id=tostring(app_session_id), browser_session_id=tostring(browser_session_id), connection_id=tostring(connection_id), dlp_incident_id=tostring(dlp_incident_id), dlp_parent_id=tostring(dlp_parent_id), incident_id=tostring(incident_id), latest_incident_id=tostring(latest_incident_id), request_id=tostring(request_id), transaction_id=tostring(transaction_id), dst_latitude=tostring(dst_latitude), dst_longitude=tostring(dst_longitude), src_latitude=tostring(src_latitude), src_longitude=tostring(src_longitude) | project-away _id')]",
         "NetskopeTableSharedColumns": [
             { "name": "TimeGenerated", "type": "datetime", "isDefaultDisplay": true, "description": "The timestamp (UTC) reflecting the time in which the event was generated." },
@@ -361,18 +365,30 @@
                                         { "metricName": "Total logs received (Other Events)", "legend": "Netskope Other Events Logs", "baseQuery": "[variables('_logAnalyticsTableId1')]" },
                                         { "metricName": "Total Alert logs received", "legend": "Netskope Alert Logs", "baseQuery": "[variables('_logAnalyticsTableAlerts')]" },
                                         { "metricName": "Total App Event logs received", "legend": "Netskope App Event Logs", "baseQuery": "[variables('_logAnalyticsTableAppEvents')]" },
+                                        { "metricName": "Total Audit Event logs received", "legend": "Netskope Audit Event Logs", "baseQuery": "[variables('_logAnalyticsTableAuditEvents')]" },
+                                        { "metricName": "Total Incident Event logs received", "legend": "Netskope Incident Event Logs", "baseQuery": "[variables('_logAnalyticsTableIncidentEvents')]" },
+                                        { "metricName": "Total Client Event logs received", "legend": "Netskope Client Event Logs", "baseQuery": "[variables('_logAnalyticsTableClientStatusEvents')]" },
+                                        { "metricName": "Total Network Event logs received", "legend": "Netskope Network Event Logs", "baseQuery": "[variables('_logAnalyticsTableNetworkEvents')]" },
                                         { "metricName": "Total Page Event logs received", "legend": "Netskope Page Event Logs", "baseQuery": "[variables('_logAnalyticsTablePageEvents')]" }
                                     ],
                                     "sampleQueries": [
                                         { "description": "Get Sample of Netskope Other Events Logs", "query": "[concat(variables('_logAnalyticsTableId1'),'| take 10')]" },
                                         { "description": "Get Sample of Netskope Alert Logs", "query": "[concat(variables('_logAnalyticsTableAlerts'),'| take 10')]" },
                                         { "description": "Get Sample of Netskope App Event Logs", "query": "[concat(variables('_logAnalyticsTableAppEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Audit Event Logs", "query": "[concat(variables('_logAnalyticsTableAuditEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Incident Event Logs", "query": "[concat(variables('_logAnalyticsTableIncidentEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Client Event Logs", "query": "[concat(variables('_logAnalyticsTableClientStatusEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Network Logs", "query": "[concat(variables('_logAnalyticsTableNetworkEvents'),'| take 10')]" },
                                         { "description": "Get Sample of Netskope Page Event Logs", "query": "[concat(variables('_logAnalyticsTablePageEvents'),'| take 10')]" }
                                     ],
                                     "dataTypes": [
                                         { "name": "[variables('_logAnalyticsTableId1')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableId1'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
                                         { "name": "[variables('_logAnalyticsTableAlerts')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableAlerts'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
                                         { "name": "[variables('_logAnalyticsTableAppEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableAppEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableAuditEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableAuditEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableIncidentEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableIncidentEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableClientStatusEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableClientStatusEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableNetworkEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableNetworkEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
                                         { "name": "[variables('_logAnalyticsTablePageEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTablePageEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" }
                                     ],
                                     "connectivityCriteria": [ { "type": "HasDataConnectors", "value": null } ],
@@ -414,6 +430,10 @@
                                     { "streams": ["Custom-NetskopeEvents"], "destinations": ["clv2ws1"], "transformKql": "[concat('source | where isnotempty(record_type) and record_type startswith \"alert\" | ', variables('commonKqlTransformations'))]", "outputStream": "[concat('Custom-',variables('_logAnalyticsTableAlerts'))]" },
                                     { "streams": ["Custom-NetskopeEvents"], "destinations": ["clv2ws1"], "transformKql": "[concat('source | where record_type == \"application\" | ', variables('commonKqlTransformations'))]", "outputStream": "[concat('Custom-',variables('_logAnalyticsTableAppEvents'))]" },
                                     { "streams": ["Custom-NetskopeEvents"], "destinations": ["clv2ws1"], "transformKql": "[concat('source | where record_type == \"page\" | ', variables('commonKqlTransformations'))]", "outputStream": "[concat('Custom-',variables('_logAnalyticsTablePageEvents'))]" },
+                                    { "streams": ["Custom-NetskopeEvents"], "destinations": ["clv2ws1"], "transformKql": "[concat('source | where record_type == \"audit\" | ', variables('commonKqlTransformations'))]", "outputStream": "[concat('Custom-',variables('_logAnalyticsTableAuditEvents'))]" },
+                                    { "streams": ["Custom-NetskopeEvents"], "destinations": ["clv2ws1"], "transformKql": "[concat('source | where isnotempty(record_type) and record_type startswith \"client\" | ', variables('commonKqlTransformations'))]", "outputStream": "[concat('Custom-',variables('_logAnalyticsTableClientStatusEvents'))]" },
+                                    { "streams": ["Custom-NetskopeEvents"], "destinations": ["clv2ws1"], "transformKql": "[concat('source | where record_type == \"incident\" | ', variables('commonKqlTransformations'))]", "outputStream": "[concat('Custom-',variables('_logAnalyticsTableIncidentEvents'))]" },
+                                    { "streams": ["Custom-NetskopeEvents"], "destinations": ["clv2ws1"], "transformKql": "[concat('source | where record_type == \"network\" | ', variables('commonKqlTransformations'))]", "outputStream": "[concat('Custom-',variables('_logAnalyticsTableNetworkEvents'))]" },
                                     { "streams": ["Custom-NetskopeEvents"], "destinations": ["clv2ws1"], "transformKql": "[concat('source | where isnotempty(record_type) and not(record_type startswith \"alert\" or record_type == \"application\" or record_type == \"page\") | ', variables('commonKqlTransformations'))]", "outputStream": "[concat('Custom-',variables('_logAnalyticsTableId1'))]" }
                                 ],
                                 "dataCollectionEndpointId": "[concat('/subscriptions/',parameters('subscription'),'/resourceGroups/',parameters('resourceGroupName'),'/providers/Microsoft.Insights/dataCollectionEndpoints/',parameters('workspace'))]"
@@ -433,6 +453,26 @@
                             "name": "[variables('_logAnalyticsTableAppEvents')]", "apiVersion": "2022-10-01", "type": "Microsoft.OperationalInsights/workspaces/tables",
                             "location": "[parameters('workspace-location')]",
                             "properties": { "schema": { "name": "[variables('_logAnalyticsTableAppEvents')]", "displayName": "Netskope Application Events", "columns": "[variables('NetskopeTableSharedColumns')]" } }
+                        },
+                        {
+                            "name": "[variables('_logAnalyticsTableAuditEvents')]", "apiVersion": "2022-10-01", "type": "Microsoft.OperationalInsights/workspaces/tables",
+                            "location": "[parameters('workspace-location')]",
+                            "properties": { "schema": { "name": "[variables('_logAnalyticsTableAuditEvents')]", "displayName": "Netskope Audit Events", "columns": "[variables('NetskopeTableSharedColumns')]" } }
+                        },
+                        {
+                            "name": "[variables('_logAnalyticsTableClientStatusEvents')]", "apiVersion": "2022-10-01", "type": "Microsoft.OperationalInsights/workspaces/tables",
+                            "location": "[parameters('workspace-location')]",
+                            "properties": { "schema": { "name": "[variables('_logAnalyticsTableClientStatusEvents')]", "displayName": "Netskope Client Status Events", "columns": "[variables('NetskopeTableSharedColumns')]" } }
+                        },
+                        {
+                            "name": "[variables('_logAnalyticsTableIncidentEvents')]", "apiVersion": "2022-10-01", "type": "Microsoft.OperationalInsights/workspaces/tables",
+                            "location": "[parameters('workspace-location')]",
+                            "properties": { "schema": { "name": "[variables('_logAnalyticsTableIncidentEvents')]", "displayName": "Netskope DLP Incident Events", "columns": "[variables('NetskopeTableSharedColumns')]" } }
+                        },
+                        {
+                            "name": "[variables('_logAnalyticsTableNetworkEvents')]", "apiVersion": "2022-10-01", "type": "Microsoft.OperationalInsights/workspaces/tables",
+                            "location": "[parameters('workspace-location')]",
+                            "properties": { "schema": { "name": "[variables('_logAnalyticsTableNetworkEvents')]", "displayName": "Netskope Network Events", "columns": "[variables('NetskopeTableSharedColumns')]" } }
                         },
                         {
                             "name": "[variables('_logAnalyticsTablePageEvents')]", "apiVersion": "2022-10-01", "type": "Microsoft.OperationalInsights/workspaces/tables",
@@ -455,23 +495,35 @@
             "properties": {
                 "connectorUiConfig": { "id": "NetskopeEventsAlerts", "title": "NetskopeEventsAlerts", "publisher": "Microsoft", "descriptionMarkdown": "NetskopeEvents",
                      "graphQueries": [
-                        { "metricName": "Total logs received (Other Events)", "legend": "Netskope Other Events Logs", "baseQuery": "[variables('_logAnalyticsTableId1')]" },
-                        { "metricName": "Total Alert logs received", "legend": "Netskope Alert Logs", "baseQuery": "[variables('_logAnalyticsTableAlerts')]" },
-                        { "metricName": "Total App Event logs received", "legend": "Netskope App Event Logs", "baseQuery": "[variables('_logAnalyticsTableAppEvents')]" },
-                        { "metricName": "Total Page Event logs received", "legend": "Netskope Page Event Logs", "baseQuery": "[variables('_logAnalyticsTablePageEvents')]" }
-                    ],
-                    "sampleQueries": [
-                        { "description": "Get Sample of Netskope Other Events Logs", "query": "[concat(variables('_logAnalyticsTableId1'),'| take 10')]" },
-                        { "description": "Get Sample of Netskope Alert Logs", "query": "[concat(variables('_logAnalyticsTableAlerts'),'| take 10')]" },
-                        { "description": "Get Sample of Netskope App Event Logs", "query": "[concat(variables('_logAnalyticsTableAppEvents'),'| take 10')]" },
-                        { "description": "Get Sample of Netskope Page Event Logs", "query": "[concat(variables('_logAnalyticsTablePageEvents'),'| take 10')]" }
-                    ],
-                    "dataTypes": [
-                        { "name": "[variables('_logAnalyticsTableId1')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableId1'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
-                        { "name": "[variables('_logAnalyticsTableAlerts')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableAlerts'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
-                        { "name": "[variables('_logAnalyticsTableAppEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableAppEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
-                        { "name": "[variables('_logAnalyticsTablePageEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTablePageEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" }
-                    ],
+                                        { "metricName": "Total logs received (Other Events)", "legend": "Netskope Other Events Logs", "baseQuery": "[variables('_logAnalyticsTableId1')]" },
+                                        { "metricName": "Total Alert logs received", "legend": "Netskope Alert Logs", "baseQuery": "[variables('_logAnalyticsTableAlerts')]" },
+                                        { "metricName": "Total App Event logs received", "legend": "Netskope App Event Logs", "baseQuery": "[variables('_logAnalyticsTableAppEvents')]" },
+                                        { "metricName": "Total Audit Event logs received", "legend": "Netskope Audit Event Logs", "baseQuery": "[variables('_logAnalyticsTableAuditEvents')]" },
+                                        { "metricName": "Total Incident Event logs received", "legend": "Netskope Incident Event Logs", "baseQuery": "[variables('_logAnalyticsTableIncidentEvents')]" },
+                                        { "metricName": "Total Client Event logs received", "legend": "Netskope Client Event Logs", "baseQuery": "[variables('_logAnalyticsTableClientStatusEvents')]" },
+                                        { "metricName": "Total Network Event logs received", "legend": "Netskope Network Event Logs", "baseQuery": "[variables('_logAnalyticsTableNetworkEvents')]" },
+                                        { "metricName": "Total Page Event logs received", "legend": "Netskope Page Event Logs", "baseQuery": "[variables('_logAnalyticsTablePageEvents')]" }
+                                    ],
+                                    "sampleQueries": [
+                                        { "description": "Get Sample of Netskope Other Events Logs", "query": "[concat(variables('_logAnalyticsTableId1'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Alert Logs", "query": "[concat(variables('_logAnalyticsTableAlerts'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope App Event Logs", "query": "[concat(variables('_logAnalyticsTableAppEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Audit Event Logs", "query": "[concat(variables('_logAnalyticsTableAuditEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Incident Event Logs", "query": "[concat(variables('_logAnalyticsTableIncidentEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Client Event Logs", "query": "[concat(variables('_logAnalyticsTableClientStatusEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Network Logs", "query": "[concat(variables('_logAnalyticsTableNetworkEvents'),'| take 10')]" },
+                                        { "description": "Get Sample of Netskope Page Event Logs", "query": "[concat(variables('_logAnalyticsTablePageEvents'),'| take 10')]" }
+                                    ],
+                                    "dataTypes": [
+                                        { "name": "[variables('_logAnalyticsTableId1')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableId1'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableAlerts')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableAlerts'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableAppEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableAppEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableAuditEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableAuditEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableIncidentEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableIncidentEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableClientStatusEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableClientStatusEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTableNetworkEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTableNetworkEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" },
+                                        { "name": "[variables('_logAnalyticsTablePageEvents')]", "lastDataReceivedQuery": "[concat(variables('_logAnalyticsTablePageEvents'),'\n       | where TimeGenerated > ago(12h)                | summarize Time = max(TimeGenerated)\n            ')]" }
+                                    ],
                     "connectivityCriteria": [ { "type": "HasDataConnectors", "value": null } ], "availability": { "status": 1, "isPreview": false },
                     "permissions": { "tenant": null, "licenses": null,
                         "resourceProvider": [
