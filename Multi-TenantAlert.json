@@ -1,0 +1,2158 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Not used, but needed to pass the arm-ttk test, 'Location-Should-Not-Be-Hardcoded'. Instead the `workspace-location` derived from the log analytics workspace is used."
+            }
+        },
+        "workspace-location": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "[concat('Region to deploy solution resources -- separate from location selection',parameters('location'))]"
+            }
+        },
+        "subscription": {
+            "defaultValue": "[last(split(subscription().id, '/'))]",
+            "type": "string",
+            "metadata": {
+                "description": "subscription id where Microsoft Sentinel is configured"
+            }
+        },
+        "resourceGroupName": {
+            "defaultValue": "[resourceGroup().name]",
+            "type": "string",
+            "metadata": {
+                "description": "resource group name where Microsoft Sentinel is configured"
+            }
+        },
+        "workspace": {
+            "defaultValue": "",
+            "type": "string",
+            "metadata": {
+                "description": "the log analytics workspace enabled for Microsoft Sentinel"
+            }
+        },
+        "dataCollectionEndpointName": {
+            "defaultValue": "",
+            "type": "string",
+            "metadata": {
+                "description": "DCE name"
+            }
+        },
+        "solutionName": {
+            "type": "string",
+            "defaultValue": "Netskope Alerts v2 CCP Tenant 2",
+            "metadata": {
+                "description": "The display name for the solution package."
+            }
+        },
+        "solutionTitle": {
+            "type": "string",
+            "defaultValue": "Netskope Alerts CCP Tenant 2",
+            "metadata": {
+                "description": "The title displayed in the connector UI."
+            }
+        },
+        "solutionId": {
+            "type": "string",
+            "defaultValue": "azuresentinel.azure-sentinel-solution-azuresentinel.azure-sentinel-NetskopeAlertv2CCPTenant2",
+            "metadata": {
+                "description": "Unique identifier for the solution."
+            }
+        },
+        "dataConnectorContentIdConnectorDefinition": {
+            "type": "string",
+            "defaultValue": "NetskopeAlertv2CCPDefinitionTenant2",
+            "metadata": {
+                "description": "Content ID for the data connector definition."
+            }
+        },
+        "dataConnectorContentIdConnections": {
+            "type": "string",
+            "defaultValue": "NetskopeAlertv2CCPConnectionTenant2",
+            "metadata": {
+                "description": "Content ID for the data connector connections."
+            }
+        },
+        "dcrName": {
+            "type": "string",
+            "defaultValue": "NetskopeAlertsDCRTenant2",
+            "metadata": {
+                "description": "Name for the Data Collection Rule (DCR)."
+            }
+        },
+        "dataConnectorName": {
+            "type": "string",
+            "defaultValue": "NetskopeAlertv2CCPtenant2",
+            "metadata": {
+                "description": "Unique name for the data connector instance."
+            }
+        },
+        "logAnalyticsTableName": {
+            "type": "string",
+            "defaultValue": "NetskopeAlertsEvents_CL",
+            "metadata": {
+                "description": "The name of the custom Log Analytics table to store the data."
+            }
+        }
+    },
+    // Next is the variables section here
+    "variables": {
+        "workspaceResourceId": "[resourceId('microsoft.OperationalInsights/Workspaces', parameters('workspace'))]",
+        "_solutionVersion": "3.0.0",
+        "_solutionAuthor": "Microsoft",
+        "_packageIcon": "<img src=\"{LogoLink}\" width=\"75px\" height=\"75px\">",
+        "dataConnectorVersionConnectorDefinition": "1.0.0",
+        "dataConnectorVersionConnections": "1.0.0",
+        "_solutionTier": "Microsoft",
+        "dataConnectorTemplateNameConnectorDefinition": "[concat(parameters('workspace'),'-dc-',uniquestring(parameters('dataConnectorContentIdConnectorDefinition')))]",
+        "dataConnectorTemplateNameConnections": "[concat(parameters('workspace'),'-dc-',uniquestring(parameters('dataConnectorContentIdConnections')))]"
+    },
+    // Next is the resources sections here
+    "resources": [
+        // resource section 1 - contentTemplates
+        {
+            "type": "Microsoft.OperationalInsights/workspaces/providers/contentTemplates",
+            "apiVersion": "2023-04-01-preview",
+            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/', variables('dataConnectorTemplateNameConnectorDefinition'), variables('dataConnectorVersionConnectorDefinition'))]",
+            "location": "[parameters('workspace-location')]",
+            "dependsOn": [
+                "[extensionResourceId(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspace')), 'Microsoft.SecurityInsights/contentPackages', parameters('solutionId'))]"
+            ],
+            "properties": {
+                "contentId": "[parameters('dataConnectorContentIdConnectorDefinition')]",
+                "displayName": "[concat(parameters('solutionName'), variables('dataConnectorTemplateNameConnectorDefinition'))]",
+                "contentKind": "DataConnector",
+                "mainTemplate": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "[variables('dataConnectorVersionConnectorDefinition')]",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        {
+                            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',concat('DataConnector-', parameters('dataConnectorContentIdConnectorDefinition')))]",
+                            "apiVersion": "2022-01-01-preview",
+                            "type": "Microsoft.OperationalInsights/workspaces/providers/metadata",
+                            "properties": {
+                                "parentId": "[extensionResourceId(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspace')), 'Microsoft.SecurityInsights/dataConnectorDefinitions', parameters('dataConnectorContentIdConnectorDefinition'))]",
+                                "contentId": "[parameters('dataConnectorContentIdConnectorDefinition')]",
+                                "kind": "DataConnector",
+                                "version": "[variables('dataConnectorVersionConnectorDefinition')]",
+                                "source": {
+                                    "sourceId": "[parameters('solutionId')]",
+                                    "name": "[parameters('solutionName')]",
+                                    "kind": "Solution"
+                                },
+                                "author": {
+                                    "name": "[variables('_solutionAuthor')]"
+                                },
+                                "support": {
+                                    "name": "[variables('_solutionAuthor')]",
+                                    "tier": "[variables('_solutionTier')]"
+                                },
+                                "dependencies": {
+                                    "criteria": [
+                                        {
+                                            "version": "[variables('dataConnectorVersionConnections')]",
+                                            "contentId": "[parameters('dataConnectorContentIdConnections')]",
+                                            "kind": "ResourcesDataConnector"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "[parameters('dcrName')]",
+                            "apiVersion": "2021-09-01-preview",
+                            "type": "Microsoft.Insights/dataCollectionRules",
+                            "location": "[parameters('workspace-location')]",
+                            "dependsOn": [
+                                "[parameters('logAnalyticsTableName')]"
+                            ],
+                            "kind": null,
+                            "properties": {
+                                "dataCollectionEndpointId": "[concat('/subscriptions/',parameters('subscription'),'/resourceGroups/',parameters('resourceGroupName'),'/providers/Microsoft.Insights/dataCollectionEndpoints/',parameters('dataCollectionEndpointName'))]",
+                                "streamDeclarations": {
+                                    "[concat('Custom-', parameters('logAnalyticsTableName'))]": {
+                                        "columns": [
+                                             {
+                                                 "name": "TimeGenerated",
+                                                 "type": "datetime"
+                                             },
+                                             {
+                                                 "name": "access_method",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "account_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "account_name",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "acked",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "action",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "activity",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "alert",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "alert_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "alert_name",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "alert_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "app",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "app_activity",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "app_sessionid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "appcategory",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "appsuite",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "asset_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "asset_object_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "breach_date",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "breach_description",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "breach_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "breach_media_references",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "breach_score",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "breach_target_references",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "browser",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "browser_sessionid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "browser_version",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "bypass_traffic",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "category",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "cci",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "ccl",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "client_bytes",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "compliance_standards",
+                                                 "type": "dynamic"
+                                             },
+                                             {
+                                                 "name": "conn_duration",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "conn_endtime",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "conn_starttime",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "connectionid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "CononicalName",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "count_i",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "data_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "device",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "device_classification",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_file",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_incidentid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_is_unique_count",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_mail_parent_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_parentid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_profile",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_rule",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_rule_count",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "dlp_rule_severity",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dlp_unique_count",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "domain",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dst_country",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dst_geoip_src",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "dst_latitude",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "dst_location",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dst_longitude",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "dst_region",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dst_timezone",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dst_zipcode",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dstip",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dsthost",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "dstport",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "email_source",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "event_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "evt_src_chnl",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "exposure",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "external_collaborator_count",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "external_email",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "file_cls_encrypted",
+                                                 "type": "boolean"
+                                             },
+                                             {
+                                                 "name": "file_lang",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "file_path",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "file_size",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "file_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "from_user",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "fromlogs",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "hostname",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "http_transaction_count",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "iaas_asset_tags",
+                                                 "type": "dynamic"
+                                             },
+                                             {
+                                                 "name": "iaas_remediated",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "instance",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "instance_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "internal_collaborator_count",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "justification_reason",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "justification_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "last_app",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "last_country",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "last_device",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "last_location",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "last_region",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "last_timestamp",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "log_file_name",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "malicious",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "malsite_category",
+                                                 "type": "dynamic"
+                                             },
+                                             {
+                                                 "name": "malsite_country",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "malsite_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "malsite_ip_host",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "malsite_latitude",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "malsite_longitude",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "malsite_region",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "managed_app",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "managementID",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "matched_username",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "md5",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "mime_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "modified",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "netskope_activity",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "netskope_pop",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "notify_template",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "nsdeviceuid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "numbytes",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "object",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "object_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "object_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "org",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "organization_unit",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "orig_ty",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "orignal_file_path",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "os",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "os_version",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "other_categories",
+                                                 "type": "dynamic"
+                                             },
+                                             {
+                                                 "name": "outer_doc_type",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "owner",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "page",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "page_site",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "parent_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "password_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "policy",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "policy_actions",
+                                                 "type": "dynamic"
+                                             },
+                                             {
+                                                 "name": "policy_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "profile_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "protocol",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "referer",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "region_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "region_name",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "req_cnt",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "requestid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "resource_category",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "resource_group",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "resp_cnt",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "sa_profile_id",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "sa_profile_name",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "sa_rule_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "sa_rule_name",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "sa_rule_severity",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "sAMAccountName",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "sanctioned_instance",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "scan_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "serial",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "server_bytes",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "sessionid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "severity",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "severity_level",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "severity_level_id",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "sfwder",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "sha256",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "shared_domains",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "shared_with",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "site",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "src_country",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "src_geoip_src",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "src_latitude",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "src_location",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "src_longitude",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "src_region",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "src_time",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "src_timezone",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "src_zipcode",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "srcip",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "suppression_end_time",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "suppression_key",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "suppression_start_time",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "telemetry_app",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "threat_match_field",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "threat_match_value",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "threat_source_id",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "threshold",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "threshold_time",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "timestamp",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "title_s",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "to_object",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "total_collaborator_count",
+                                                 "type": "int"
+                                             },
+                                             {
+                                                 "name": "traffic_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "transactionid",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "true_obj_category",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "true_obj_type",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "tss_mode",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "two_factor_auth",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "type_s",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "universal_connector",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "ur_normalized",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "url",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "user",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "user_generated",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "user_id",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "useragent",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "userip",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "userkey",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "userPrincipalName",
+                                                 "type": "string"
+                                             },
+                                             {
+                                                 "name": "web_universal_connector",
+                                                 "type": "string"
+                                             }
+                                        ]
+                                    }
+                                },
+                                "dataSources": {},
+                                "destinations": {
+                                    "logAnalytics": [
+                                        {
+                                            "workspaceResourceId": "[variables('workspaceResourceId')]",
+                                            "name": "[guid(variables('workspaceResourceId'), parameters('logAnalyticsTableName'))]"
+                                        }
+                                    ]
+                                },
+                                "dataFlows": [
+                                    {
+                                        "streams": [
+                                            "[concat('Custom-', parameters('logAnalyticsTableName'))]"
+                                        ],
+                                        "destinations": [
+                                            "[guid(variables('workspaceResourceId'), parameters('logAnalyticsTableName'))]"
+                                        ],
+                                        "transformKql": "source | extend TimeGenerated = datetime(1970-01-01) + timestamp * 1sec | extend app_sessionid = tostring(app_session_id), browser_sessionid = tostring(browser_session_id), connectionid = tostring(connection_id), dlp_incidentid = tostring(dlp_incident_id), dlp_parentid = tostring(dlp_parent_id), requestid = tostring(request_id), transactionid = tostring(transaction_id) | project-rename count_i = ['count'], title_s = ['title'], type_s = ['type'] | project-away _id ",
+                                        "outputStream": "[concat('Custom-', parameters('logAnalyticsTableName'))]"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "[parameters('logAnalyticsTableName')]",
+                            "apiVersion": "2022-10-01",
+                            "type": "Microsoft.OperationalInsights/workspaces/tables",
+                            "location": "[parameters('workspace-location')]",
+                            "kind": null,
+                            "properties": {
+                                "totalRetentionInDays": 30,
+                                "archiveRetentionInDays": 0,
+                                "plan": "Analytics",
+                                "retentionInDaysAsDefault": true,
+                                "totalRetentionInDaysAsDefault": true,
+                                "schema": {
+                                    "name": "[parameters('logAnalyticsTableName')]",
+                                    "tableSubType": "DataCollectionRuleBased",
+                                    "tableType": "CustomLog",
+                                    "columns": [
+                                         {
+                                           "name": "TimeGenerated",
+                                           "type": "datetime"
+                                         },
+                                         {
+                                           "name": "access_method",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "account_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "account_name",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "acked",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "action",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "activity",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "alert",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "alert_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "alert_name",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "alert_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "app",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "app_activity",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "app_sessionid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "appcategory",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "appsuite",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "asset_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "asset_object_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "breach_date",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "breach_description",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "breach_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "breach_media_references",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "breach_score",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "breach_target_references",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "browser",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "browser_sessionid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "browser_version",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "bypass_traffic",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "category",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "cci",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "ccl",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "client_bytes",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "compliance_standards",
+                                           "type": "dynamic"
+                                         },
+                                         {
+                                           "name": "conn_duration",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "conn_endtime",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "conn_starttime",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "connectionid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "CononicalName",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "count_i",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "data_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "device",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "device_classification",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_file",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_incidentid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_is_unique_count",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_mail_parent_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_parentid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_profile",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_rule",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_rule_count",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "dlp_rule_severity",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dlp_unique_count",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "domain",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dst_country",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dst_geoip_src",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "dst_latitude",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "dst_location",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dst_longitude",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "dst_region",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dst_timezone",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dst_zipcode",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dstip",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dsthost",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "dstport",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "email_source",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "event_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "evt_src_chnl",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "exposure",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "external_collaborator_count",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "external_email",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "file_cls_encrypted",
+                                           "type": "boolean"
+                                         },
+                                         {
+                                           "name": "file_lang",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "file_path",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "file_size",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "file_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "from_user",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "fromlogs",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "hostname",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "http_transaction_count",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "iaas_asset_tags",
+                                           "type": "dynamic"
+                                         },
+                                         {
+                                           "name": "iaas_remediated",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "instance",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "instance_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "internal_collaborator_count",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "justification_reason",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "justification_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "last_app",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "last_country",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "last_device",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "last_location",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "last_region",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "last_timestamp",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "log_file_name",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "malicious",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "malsite_category",
+                                           "type": "dynamic"
+                                         },
+                                         {
+                                           "name": "malsite_country",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "malsite_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "malsite_ip_host",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "malsite_latitude",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "malsite_longitude",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "malsite_region",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "managed_app",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "managementID",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "matched_username",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "md5",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "mime_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "modified",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "netskope_activity",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "netskope_pop",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "notify_template",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "nsdeviceuid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "numbytes",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "object",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "object_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "object_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "org",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "organization_unit",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "orig_ty",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "orignal_file_path",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "os",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "os_version",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "other_categories",
+                                           "type": "dynamic"
+                                         },
+                                         {
+                                           "name": "outer_doc_type",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "owner",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "page",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "page_site",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "parent_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "password_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "policy",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "policy_actions",
+                                           "type": "dynamic"
+                                         },
+                                         {
+                                           "name": "policy_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "profile_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "protocol",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "referer",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "region_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "region_name",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "req_cnt",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "requestid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "resource_category",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "resource_group",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "resp_cnt",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "sa_profile_id",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "sa_profile_name",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "sa_rule_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "sa_rule_name",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "sa_rule_severity",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "sAMAccountName",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "sanctioned_instance",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "scan_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "serial",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "server_bytes",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "sessionid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "severity",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "severity_level",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "severity_level_id",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "sfwder",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "sha256",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "shared_domains",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "shared_with",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "site",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "src_country",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "src_geoip_src",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "src_latitude",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "src_location",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "src_longitude",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "src_region",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "src_time",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "src_timezone",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "src_zipcode",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "srcip",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "suppression_end_time",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "suppression_key",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "suppression_start_time",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "telemetry_app",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "threat_match_field",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "threat_match_value",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "threat_source_id",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "threshold",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "threshold_time",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "timestamp",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "title_s",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "to_object",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "total_collaborator_count",
+                                           "type": "int"
+                                         },
+                                         {
+                                           "name": "traffic_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "transactionid",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "true_obj_category",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "true_obj_type",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "tss_mode",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "two_factor_auth",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "type_s",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "universal_connector",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "ur_normalized",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "url",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "user",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "user_generated",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "user_id",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "useragent",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "userip",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "userkey",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "userPrincipalName",
+                                           "type": "string"
+                                         },
+                                         {
+                                           "name": "web_universal_connector",
+                                           "type": "string"
+                                         }
+                                    ],
+                                    "standardColumns": [
+                                        {
+                                            "name": "TenantId",
+                                            "type": "guid",
+                                            "isDefaultDisplay": false,
+                                            "isHidden": false
+                                        }
+                                    ],
+                                    "solutions": [
+                                        "LogManagement"
+                                    ],
+                                    "isTroubleshootingAllowed": true
+                                },
+                                "provisioningState": "Succeeded",
+                                "retentionInDays": 30
+                            }
+                        }
+                    ]
+                },
+                "packageKind": "Solution",
+                "packageVersion": "[variables('_solutionVersion')]",
+                "packageName": "[parameters('solutionName')]",
+                "contentProductId": "[concat(substring(parameters('solutionId'), 0, 50),'-','dc','-', uniqueString(concat(parameters('solutionId'),'-','DataConnector','-',parameters('dataConnectorContentIdConnectorDefinition'),'-', variables('dataConnectorVersionConnectorDefinition'))))]",
+                "packageId": "[parameters('solutionId')]",
+                "contentSchemaVersion": "3.0.0",
+                "version": "[variables('_solutionVersion')]"
+            }
+        },
+        // resource 2 section here
+        // resource section 2 - dataConnectorDefinitions
+        {
+            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',parameters('dataConnectorContentIdConnectorDefinition'))]",
+            "apiVersion": "2022-09-01-preview",
+            "type": "Microsoft.OperationalInsights/workspaces/providers/dataConnectorDefinitions",
+            "location": "[parameters('workspace-location')]",
+            "kind": "Customizable",
+            "properties": {
+                "connectorUiConfig": {
+                    "title": "[parameters('solutionTitle')]",
+                    "publisher": "[variables('_solutionAuthor')]",
+                    "descriptionMarkdown": "This is an example of data connector",
+                    "graphQueriesTableName": "[parameters('logAnalyticsTableName')]",
+                    "graphQueries": [
+                        {
+                            "metricName": "Events received",
+                            "legend": "My data connector events",
+                            "baseQuery": "[parameters('logAnalyticsTableName')]"
+                        }
+                    ],
+                    "sampleQueries": [
+                        {
+                            "description": "All event logs",
+                            "query": "{{graphQueriesTableName}} \n | take 10"
+                        }
+                    ],
+                    "dataTypes": [
+                        {
+                            "name": "{{graphQueriesTableName}}",
+                            "lastDataReceivedQuery": "{{graphQueriesTableName}} \n | summarize Time = max(TimeGenerated)\n | where isnotempty(Time)"
+                        }
+                    ],
+                    "connectivityCriteria": [
+                        {
+                            "type": "HasDataConnectors"
+                        }
+                    ],
+                    "permissions": {
+                        "resourceProvider": [
+                            {
+                                "provider": "Microsoft.OperationalInsights/workspaces",
+                                "permissionsDisplayText": "Read and Write permissions are required.",
+                                "providerDisplayName": "Workspace",
+                                "scope": "Workspace",
+                                "requiredPermissions": {
+                                    "write": true,
+                                    "read": true,
+                                    "delete": true
+                                }
+                            }
+                        ],
+                        "customs": [
+                            {
+                                "name": "Netskope v2 alerts URL and API key",
+                                "description": "Netskope v2 API requires an API key to authenticate"
+                            }
+                        ]
+                    },
+                    "instructionSteps": [
+                        {
+                            "description": "To enable the Netskope Alerts v2 connector to Microsoft Sentinel, provide the required information below and click on Connect.\n",
+                            "instructions": [
+                                {
+                                    "type": "Textbox",
+                                    "parameters": {
+                                        "label": "Alerts v2 Endpoint",
+                                        "placeholder": "https://<tenant_name>.goskope.com/api/v2/events/dataexport/events/alert?operation=next&index=codeless",
+                                        "type": "text",
+                                        "name": "endpoint"
+                                    }
+                                },
+                                {
+                                    "type": "Textbox",
+                                    "parameters": {
+                                        "label": "Netskope v2 API key",
+                                        "placeholder": "",
+                                        "type": "text",
+                                        "name": "apiKey"
+                                    }
+                                },
+                                {
+                                    "parameters": {
+                                        "label": "toggle",
+                                        "name": "toggle"
+                                    },
+                                    "type": "ConnectionToggleButton"
+                                }
+                            ],
+                            "title": "Connect to Netskope Alerts v2 endpoint to start collecting event logs to Microsoft Sentinel"
+                        }
+                    ]
+                }
+            }
+        },
+        // resource 3 section here
+        // resource section 3 - metadata
+        {
+            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',concat('DataConnector-', parameters('dataConnectorContentIdConnectorDefinition')))]",
+            "apiVersion": "2022-01-01-preview",
+            "type": "Microsoft.OperationalInsights/workspaces/providers/metadata",
+            "properties": {
+                "parentId": "[extensionResourceId(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspace')), 'Microsoft.SecurityInsights/dataConnectorDefinitions', parameters('dataConnectorContentIdConnectorDefinition'))]",
+                "contentId": "[parameters('dataConnectorContentIdConnectorDefinition')]",
+                "kind": "DataConnector",
+                "version": "[variables('dataConnectorVersionConnectorDefinition')]",
+                "source": {
+                    "sourceId": "[parameters('solutionId')]",
+                    "name": "[parameters('solutionName')]",
+                    "kind": "Solution"
+                },
+                "author": {
+                    "name": "[variables('_solutionAuthor')]"
+                },
+                "support": {
+                    "name": "[variables('_solutionAuthor')]",
+                    "tier": "[variables('_solutionTier')]"
+                },
+                "dependencies": {
+                    "criteria": [
+                        {
+                            "version": "[variables('dataConnectorVersionConnections')]",
+                            "contentId": "[parameters('dataConnectorContentIdConnections')]",
+                            "kind": "ResourcesDataConnector"
+                        }
+                    ]
+                }
+            }
+        },
+        // resource 4 section here
+        // resource section 4 - contentTemplates
+        {
+            "type": "Microsoft.OperationalInsights/workspaces/providers/contentTemplates",
+            "apiVersion": "2023-04-01-preview",
+            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/', variables('dataConnectorTemplateNameConnections'), variables('dataConnectorVersionConnections'))]",
+            "location": "[parameters('workspace-location')]",
+            "dependsOn": [
+                "[extensionResourceId(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspace')), 'Microsoft.SecurityInsights/contentPackages', parameters('solutionId'))]"
+            ],
+            "properties": {
+                "contentId": "[parameters('dataConnectorContentIdConnections')]",
+                "displayName": "[concat(parameters('solutionName'), variables('dataConnectorTemplateNameConnections'))]",
+                "contentKind": "ResourcesDataConnector",
+                "mainTemplate": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "[variables('dataConnectorVersionConnections')]",
+                    "parameters":
+                    // These parameters are used by the data connector primarily as properties for the administrator to enter in the UI when configuring the connector
+                    {
+                        "connectorDefinitionName": {
+                            "defaultValue": "connectorDefinitionName",
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "workspace": {
+                            "defaultValue": "[parameters('workspace')]",
+                            "type": "string"
+                        },
+                        "dcrConfig": {
+                            "defaultValue": {
+                                "dataCollectionEndpoint": "data collection Endpoint",
+                                "dataCollectionRuleImmutableId": "data collection rule immutableId"
+                            },
+                            "type": "object"
+                        },
+                        "endpoint": {
+                            "type": "string"
+                        },
+                        "apiKey": {
+                            "type": "string"
+                        }
+                    },
+                    "variables": {},
+                    "resources": [
+                        {
+                            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',concat('DataConnector-', parameters('dataConnectorContentIdConnections')))]",
+                            "apiVersion": "2024-06-01",
+                            "type": "Microsoft.OperationalInsights/workspaces/providers/metadata",
+                            "properties": {
+                                "parentId": "[extensionResourceId(resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspace')), 'Microsoft.SecurityInsights/dataConnectors', parameters('dataConnectorContentIdConnections'))]",
+                                "contentId": "[parameters('dataConnectorContentIdConnections')]",
+                                "kind": "ResourcesDataConnector",
+                                "version": "[variables('dataConnectorVersionConnections')]",
+                                "source": {
+                                    "sourceId": "[parameters('solutionId')]",
+                                    "name": "[parameters('solutionName')]",
+                                    "kind": "Solution"
+                                },
+                                "author": {
+                                    "name": "[variables('_solutionAuthor')]"
+                                },
+                                "support": {
+                                    "name": "[variables('_solutionAuthor')]",
+                                    "tier": "[variables('_solutionTier')]"
+                                }
+                            }
+                        },
+                        {
+                            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/', parameters('dataConnectorName'))]",
+                            //  To create several connections using this template, make the name dynamic. For example, use the 'concat' function to add the connector name with a GUID using the 'guid' function.
+                            "apiVersion": "2024-06-01",
+                            "type": "Microsoft.OperationalInsights/workspaces/providers/dataConnectors",
+                            "location": "[parameters('workspace-location')]",
+                            "kind": "RestApiPoller",
+                            "properties": {
+                                "connectorDefinitionName": "[[parameters('connectorDefinitionName')]",
+                                "dataType": "[parameters('logAnalyticsTableName')]",
+                                "dcrConfig": {
+                                    "dataCollectionEndpoint": "[[parameters('dcrConfig').dataCollectionEndpoint]",
+                                    "dataCollectionRuleImmutableId": "[[parameters('dcrConfig').dataCollectionRuleImmutableId]",
+                                    "streamName": "[concat('Custom-',parameters('logAnalyticsTableName'))]"
+                                },
+                                "auth": {
+                                    "type": "APIKey",
+                                    "ApiKeyName": "Netskope-Api-Token",
+                                    "ApiKey": "[[parameters('apiKey')]"
+                                },
+                                "request": {
+                                    "apiEndpoint": "[[parameters('endpoint')]",
+                                    "rateLimitQPS": 10,
+                                    "queryWindowInMin": 1,
+                                    "httpMethod": "GET",
+                                    "retryCount": 3,
+                                    "timeoutInSeconds": 60,
+                                    "headers": {
+                                        "Accept": "application/json"
+                                    }
+                                },
+                                "response": {
+                                    "eventsJsonPaths": [
+                                        "$.result"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                "packageKind": "Solution",
+                "packageVersion": "[variables('_solutionVersion')]",
+                "packageName": "[parameters('solutionName')]",
+                "contentProductId": "[concat(substring(parameters('solutionId'), 0, 50),'-','rdc','-', uniqueString(concat(parameters('solutionId'),'-','ResourcesDataConnector','-',parameters('dataConnectorContentIdConnections'),'-', variables('dataConnectorVersionConnections'))))]",
+                "packageId": "[parameters('solutionId')]",
+                "contentSchemaVersion": "3.0.0",
+                "version": "[variables('_solutionVersion')]"
+            }
+        },
+        // resource 5 section here
+        // resource section 5 - contentPackages
+        {
+            "type": "Microsoft.OperationalInsights/workspaces/providers/contentPackages",
+            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/', parameters('solutionId'))]",
+            "location": "[parameters('workspace-location')]",
+            "apiVersion": "2023-04-01-preview",
+            "properties": {
+                "version": "[variables('_solutionVersion')]",
+                "kind": "Solution",
+                "contentSchemaVersion": "3.0.0",
+                "contentId": "[parameters('solutionId')]",
+                "source": {
+                    "kind": "Solution",
+                    "name": "[parameters('solutionName')]",
+                    "sourceId": "[parameters('solutionId')]"
+                },
+                "author": {
+                    "name": "[variables('_solutionAuthor')]"
+                },
+                "support": {
+                    "name": "[variables('_solutionAuthor')]"
+                },
+                "dependencies": {
+                    "operator": "AND",
+                    "criteria": [
+                        {
+                            "kind": "DataConnector",
+                            "contentId": "[variables('dataConnectorVersionConnectorDefinition')]",
+                            "version": "[parameters('dataConnectorContentIdConnectorDefinition')]"
+                        }
+                    ]
+                },
+                "firstPublishDate": "2023-12-05",
+                "providers": [
+                    "[variables('_solutionAuthor')]"
+                ],
+                "contentKind": "Solution",
+                "packageId": "[parameters('solutionId')]",
+                "contentProductId": "[concat(substring(parameters('solutionId'), 0, 50),'-','sl','-', uniqueString(concat(parameters('solutionId'),'-','Solution','-',parameters('solutionId'),'-', variables('_solutionVersion'))))]",
+                "displayName": "[parameters('solutionName')]",
+                "publisherDisplayName": "[parameters('solutionId')]",
+                "descriptionHtml": "test",
+                "icon": "[variables('_packageIcon')]"
+            }
+        }
+        // that's the end!
+    ]
+}
