@@ -1005,7 +1005,7 @@
                                         "destinations": [
                                             "[guid(variables('workspaceResourceId'), parameters('logAnalyticsTableName'))]"
                                         ],
-                                        "transformKql": "source | extend TimeGenerated = datetime(1970-01-01) + timestamp * 1sec | extend app_sessionid = tostring(app_session_id), browser_sessionid = tostring(browser_session_id), connectionid = tostring(connection_id), dlp_incidentid = tostring(dlp_incident_id), dlp_parentid = tostring(dlp_parent_id), requestid = tostring(request_id), transactionid = tostring(transaction_id) | project-rename count_i = ['count'], title_s = ['title'], type_s = ['type'] | project-away _id ",
+                                        "transformKql": "source | extend TimeGenerated = datetime(1970-01-01) + timestamp * 1sec | extend app_sessionid = tostring(app_sessionid), browser_sessionid = tostring(browser_sessionid), connectionid = tostring(connectionid), dlp_incidentid = tostring(dlp_incidentid), dlp_parentid = tostring(dlp_parentid), requestid = tostring(requestid), transactionid = tostring(transactionid) | project-rename count_i = ['count'], title_s = ['title'], type_s = ['type'] | project-away _id ",
                                         "outputStream": "[concat('Custom-', parameters('logAnalyticsTableName'))]"
                                     }
                                 ]
