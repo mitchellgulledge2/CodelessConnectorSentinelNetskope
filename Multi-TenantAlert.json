@@ -334,7 +334,7 @@
                                                  "type": "string"
                                              },
                                              {
-                                                 "name": "count_i",
+                                                 "name": "NetskopeEventCount",
                                                  "type": "int"
                                              },
                                              {
@@ -1005,7 +1005,7 @@
                                         "destinations": [
                                             "[guid(variables('workspaceResourceId'), parameters('logAnalyticsTableName'))]"
                                         ],
-                                        "transformKql": "source | extend TimeGenerated = datetime(1970-01-01) + timestamp * 1sec | extend app_sessionid = tostring(app_sessionid), browser_sessionid = tostring(browser_sessionid), connectionid = tostring(connectionid), dlp_incidentid = tostring(dlp_incidentid), dlp_parentid = tostring(dlp_parentid), requestid = tostring(requestid), transactionid = tostring(transactionid) | project-rename count_i = ['count'], title_s = ['title'], type_s = ['type'] | project-away _id ",
+                                        "transformKql": "source | extend TimeGenerated = datetime(1970-01-01) + timestamp * 1sec | extend app_sessionid = tostring(app_sessionid), browser_sessionid = tostring(browser_sessionid), connectionid = tostring(connectionid), dlp_incidentid = tostring(dlp_incidentid), dlp_parentid = tostring(dlp_parentid), requestid = tostring(requestid), transactionid = tostring(transactionid) | project-rename NetskopeEventCount = ['count'], title_s = ['title'], type_s = ['type'] | project-away _id ",
                                         "outputStream": "[concat('Custom-', parameters('logAnalyticsTableName'))]"
                                     }
                                 ]
@@ -1181,7 +1181,7 @@
                                            "type": "string"
                                          },
                                          {
-                                           "name": "count_i",
+                                           "name": "NetskopeEventCount",
                                            "type": "int"
                                          },
                                          {
@@ -2021,8 +2021,8 @@
                         },
                         "dcrConfig": {
                             "defaultValue": {
-                                "dataCollectionEndpoint": "data collection Endpoint",
-                                "dataCollectionRuleImmutableId": "data collection rule immutableId"
+                                "dataCollectionEndpoint": "https://placeholder-dce.eastus-1.ingest.monitor.azure.com",
+                                "dataCollectionRuleImmutableId": "dcr-00000000000000000000000000000000"
                             },
                             "type": "object"
                         },
